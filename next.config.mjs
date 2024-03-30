@@ -3,10 +3,9 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        port: 'https',
-        hostname: 'uploadthing.com',
+        protocol: 'https',
+        hostname: 'utfs.io',
       },
-      { port: 'https', hostname: 'utfs.io' },
     ],
   },
 };
