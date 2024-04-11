@@ -66,7 +66,7 @@ export const EditChannelModal = () => {
       form.setValue('name', channel.name);
       form.setValue('type', channel.type);
     }
-  }, [form]);
+  }, [form, channel]);
 
   const isLoading = form.formState.isSubmitting;
 
