@@ -14,17 +14,17 @@ export default async function handler(
   try {
     const profile = await currentProfilePages(req);
     const { content, fileUrl } = req.body;
-    const { serverId, channelId } = req.query;
+    const { serverid, channelid } = req.query;
 
     if (!profile) {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
-    if (!serverId) {
+    if (!serverid) {
       return res.status(400).json({ error: "Server Id missing" });
     }
 
-    if (!channelId) {
+    if (!channelid) {
       return res.status(400).json({ error: "Server Id missing" });
     }
 
@@ -34,7 +34,7 @@ export default async function handler(
 
     const server = await db.server.findFirst({
       where: {
-        id: serverId as string,
+        id: serverid as string,
         members: {
           some: {
             profileId: profile.id,
@@ -52,8 +52,8 @@ export default async function handler(
 
     const channel = await db.channel.findFirst({
       where: {
-        id: channelId as string,
-        serverId: serverId as string,
+        id: channelid as string,
+        serverId: serverid as string,
       },
     });
 
@@ -73,7 +73,7 @@ export default async function handler(
       data: {
         content,
         fileUrl,
-        channelId: channelId as string,
+        channelId: channelid as string,
         memberId: member.id,
       },
       include: {
@@ -85,7 +85,7 @@ export default async function handler(
       },
     });
 
-    const channelKey = `chat:${channelId}:messages`;
+    const channelKey = `chat:${channelid}:messages`;
 
     res?.socket?.server?.io?.emit(channelKey, message);
 

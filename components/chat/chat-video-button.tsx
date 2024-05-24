@@ -1,4 +1,4 @@
-"use Client";
+"use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
